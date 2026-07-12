@@ -147,10 +147,11 @@
       background: rgba(15,23,42,0.8);
       backdrop-filter: blur(10px);
     }
-    .stat { text-align: center; }
+    .stat { text-align: center; display: flex; flex-direction: column; align-items: center; min-height: 72px; }
     .stat-v { font-size: 1.75rem; font-weight: 800; letter-spacing: -.03em; color: var(--green); line-height: 1; }
     .stat-l { font-size: .7rem; color: var(--dim); margin-top: .2rem; text-transform: uppercase; letter-spacing: .08em; }
-    .stat-sep { width: 1px; height: 40px; background: var(--border); }
+    .stat-sub { font-size: .62rem; color: var(--dim); margin-top: .3rem; letter-spacing: .04em; opacity: .7; min-height: 14px; }
+    .stat-sep { width: 1px; height: 72px; background: var(--border); align-self: center; }
 
     /* ── SECTION BASE ── */
     .sec { padding: 5rem 1.5rem; max-width: 1100px; margin: 0 auto; }
@@ -477,13 +478,15 @@
 
 <!-- ── STATS ── -->
 <div class="stats">
-  <div class="stat"><div class="stat-v" id="stat-threats">—</div><div class="stat-l" data-en="New threats weekly">Haftalık yeni tehdit</div></div>
+  <div class="stat"><div class="stat-v" id="stat-threats">—</div><div class="stat-l" data-en="New threats this week">Haftalık yeni tehdit</div><div class="stat-sub">&nbsp;</div></div>
   <div class="stat-sep"></div>
-  <div class="stat"><div class="stat-v">4</div><div class="stat-l" data-en="Threat sources">Tehdit kaynağı</div></div>
+  <div class="stat"><div class="stat-v" id="stat-total">—</div>
+  <div class="stat-l" data-en="Threat records tracked">Tehdit Kaydı Takibimde</div>
+  <div class="stat-sub">USOM · URLhaus · OpenPhish · BOTVRIJ</div></div>
   <div class="stat-sep"></div>
-  <div class="stat"><div class="stat-v" id="stat-queries">—</div><div class="stat-l" data-en="Community queries today">Bugün topluluk sorgusu</div></div>
+  <div class="stat"><div class="stat-v" id="stat-queries">—</div><div class="stat-l" data-en="Community queries today">Bugün topluluk sorgusu</div><div class="stat-sub">&nbsp;</div></div>
   <div class="stat-sep"></div>
-  <div class="stat"><div class="stat-v" id="stat-blocked">—</div><div class="stat-l" data-en="Threats blocked today">Bugün engellenen tehdit</div></div>
+  <div class="stat"><div class="stat-v" id="stat-blocked">—</div><div class="stat-l" data-en="Threats blocked today">Bugün engellenen tehdit</div><div class="stat-sub">&nbsp;</div></div>
 </div>
 
 <!-- ── FEATURES ── -->
@@ -893,6 +896,17 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLega
       var r = Array.isArray(d) ? (d[0] && d[0].get_global_stats) : d;
       if(r && r.queries_today != null) updateEl('stat-queries', fmtK(r.queries_today));
       if(r && r.threats_today != null) updateEl('stat-blocked', fmtK(r.threats_today));
+      // total_queries: sadece 1000+ ise göster
+      if(r && r.total_queries != null && r.total_queries >= 1000) {
+        updateEl('stat-total', fmtK(r.total_queries));
+      } else {
+        updateEl('stat-total', '4');
+        // 1000 altında kaynak sayısını göster
+        var el = document.getElementById('stat-total');
+        if(el) {
+          el.nextElementSibling.textContent = window._isEN ? 'Intelligence Sources' : 'İstihbarat Kaynağı';
+        }
+      }
     })
     .catch(function(){});
   }
