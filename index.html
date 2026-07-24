@@ -506,6 +506,19 @@
     .legend-tr  { display: flex; align-items: center; gap: .375rem; font-size: .7rem; color: var(--green); margin-left: auto; }
     .legend-tr-dot { width: 10px; height: 10px; border-radius: 2px; background: var(--green); }
 
+    /* ── BAŞA DÖN BUTONU ── */
+    #back-to-top {
+      position: fixed; bottom: 28px; right: 28px; z-index: 980;
+      width: 42px; height: 42px; border-radius: 50%;
+      background: rgba(16,185,129,0.12); border: 1.5px solid rgba(16,185,129,0.35);
+      color: #10b981; font-size: 18px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; transform: translateY(10px); pointer-events: none;
+      transition: opacity .28s, transform .28s, background .2s, border-color .2s;
+    }
+    #back-to-top.btt-visible { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    #back-to-top:hover { background: rgba(16,185,129,0.26); border-color: rgba(16,185,129,0.65); }
+
     /* ── SCROLL ANIMASYONLARI ── */
     .fade-up { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
     .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -794,32 +807,9 @@
       <div id="map-tip"></div>
       <!-- SVG harita JS tarafından doldurulur -->
       <svg id="world-svg" viewBox="0 0 960 480" xmlns="http://www.w3.org/2000/svg">
-        <!-- Okyanus arka planı -->
         <rect width="960" height="480" fill="rgba(10,18,35,0.55)"/>
-        <!-- Kıtalar: daha doğru basitleştirilmiş yollar -->
-        <!-- Grönland -->
-        <path d="M255,44 L335,28 L380,36 L382,58 L355,72 L318,76 L295,62 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
-        <!-- Kuzey Amerika -->
-        <path d="M38,68 L62,42 L185,36 L255,44 L295,62 L318,76 L315,95 L308,148 L285,172 L262,192 L248,210 L225,228 L195,238 L158,252 L128,240 L115,218 L130,200 L140,190 L150,218 L130,148 L108,110 L72,90 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
-        <!-- Güney Amerika -->
-        <path d="M168,232 L250,218 L275,250 L282,302 L268,362 L242,415 L215,438 L188,428 L162,398 L148,355 L148,292 L158,262 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
-        <!-- Avrupa -->
-        <path d="M462,52 L508,42 L538,68 L528,100 L515,125 L498,140 L465,140 L440,128 L428,105 L442,80 L462,68 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
-        <!-- Afrika -->
-        <path d="M428,140 L518,128 L552,155 L558,218 L545,288 L525,342 L498,372 L468,374 L440,352 L422,312 L408,260 L410,198 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
-        <!-- Arabistan Yarımadası -->
-        <path d="M548,148 L568,162 L578,188 L572,218 L552,235 L535,228 L535,180 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
-        <!-- Asya Ana Kara (Rusya + Orta/Doğu Asya) -->
-        <path d="M520,45 L640,38 L785,34 L900,38 L958,50 L958,98 L932,105 L882,112 L855,132 L858,162 L835,182 L808,198 L785,208 L758,222 L738,228 L720,270 L698,282 L672,285 L658,260 L638,228 L615,208 L592,182 L568,162 L548,148 L535,118 L528,98 L538,68 L520,68 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
-        <!-- Hindistan Yarımadası -->
-        <path d="M658,162 L700,162 L718,198 L720,268 L700,282 L672,285 L658,260 L648,222 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
-        <!-- Güneydoğu Asya / Endonezya (kısmen) -->
-        <path d="M738,185 L812,178 L825,205 L808,222 L788,232 L762,222 L738,212 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
-        <path d="M778,238 L828,232 L845,248 L838,265 L812,270 L782,260 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
-        <!-- Japonya (basit) -->
-        <path d="M838,125 L858,122 L862,142 L852,158 L838,152 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
-        <!-- Avustralya -->
-        <path d="M712,290 L810,280 L862,305 L868,370 L838,400 L792,402 L748,385 L714,358 L700,325 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
+        <!-- Ülke şekilleri: Natural Earth 110m (topojson-client ile JS'te yüklenir) -->
+        <g id="world-countries"></g>
         <!-- Ülke bubble'ları JS tarafından eklenir -->
         <g id="map-bubbles"></g>
       </svg>
@@ -1497,7 +1487,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLega
     fetch(SUPA_URL+'/functions/v1/check-threat',{
       method:'POST',
       headers:{'Content-Type':'application/json','Authorization':'Bearer '+SUPA_KEY},
-      body:JSON.stringify({url:url})
+      body:JSON.stringify({url:url,source:'web'})
     })
     .then(function(r){ return r.json(); })
     .then(function(d){
@@ -1575,12 +1565,15 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLega
 })();
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
 <script>
-/* ── WORLD MAP ── */
+/* ── WORLD MAP (Natural Earth 110m via topojson-client) ── */
 (function(){
   var SUPA_URL='https://bvunvlcwqsjbozmjhyvi.supabase.co';
   var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2dW52bGN3cXNqYm96bWpoeXZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MzUyMjYsImV4cCI6MjA5NDExMTIyNn0.hyVKwNbYcbTe-Er6Tt8zDUAk7S8CUQi1hAyijEmCvpo';
   var isEN=window._isEN;
+
+  /* Ülke centroid koordinatları — equirectangular 960x480 */
   var CENT={
     TR:{x:573,y:136,n:'Türkiye'},    RU:{x:700,y:80, n:'Rusya'},
     CN:{x:755,y:150,n:'Çin'},        US:{x:213,y:133,n:'ABD'},
@@ -1606,19 +1599,59 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLega
 
   var tip=document.getElementById('map-tip');
   var g=document.getElementById('map-bubbles');
+  var countriesG=document.getElementById('world-countries');
   var svgEl=document.getElementById('world-svg');
   if(!g||!svgEl) return;
 
+  /* ── Natural Earth harita yükleme ─────────────────────────── */
+  /* equirectangular projeksiyon: x=(lon+180)*960/360, y=(90-lat)*480/180 */
+  function pX(lon){ return ((lon+180)*960/360).toFixed(1); }
+  function pY(lat){ return ((90-lat)*480/180).toFixed(1); }
+
+  function ringToD(ring){
+    var d='';
+    for(var i=0;i<ring.length;i++){
+      d+=(i===0?'M':'L')+pX(ring[i][0])+','+pY(ring[i][1]);
+    }
+    return d+'Z';
+  }
+
+  function geomToD(geom){
+    if(!geom) return '';
+    var polys=geom.type==='Polygon'?[geom.coordinates]:
+              geom.type==='MultiPolygon'?geom.coordinates:[];
+    var d='';
+    for(var p=0;p<polys.length;p++){
+      for(var r=0;r<polys[p].length;r++) d+=ringToD(polys[p][r]);
+    }
+    return d;
+  }
+
+  if(countriesG && typeof topojson!=='undefined'){
+    fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/countries-110m.json')
+      .then(function(r){ return r.json(); })
+      .then(function(world){
+        var features=topojson.feature(world,world.objects.countries).features;
+        var html='';
+        for(var i=0;i<features.length;i++){
+          var d=geomToD(features[i].geometry);
+          if(d) html+='<path d="'+d+'" fill="rgba(30,42,68,0.75)" stroke="rgba(100,130,180,0.22)" stroke-width="0.4"/>';
+        }
+        countriesG.innerHTML=html;
+      })
+      .catch(function(){});/* CDN erişilemezse harita boş kalır, bubble'lar çalışır */
+  }
+
+  /* ── Veri + bubble render ──────────────────────────────────── */
   function fmtK(n){ return n>=1000?(n/1000).toFixed(1).replace('.0','')+'K':String(n); }
 
   function colorFor(t,isTR){
     if(isTR) return 'rgba(16,185,129,'+(0.4+t*0.6)+')';
-    // açık kırmızı → koyu kırmızı
-    return 'rgba(244,'+ Math.round(63*(1-t)) +','+ Math.round(94*(1-t)) +','+(0.4+t*0.6)+')';
+    return 'rgba(244,'+Math.round(63*(1-t))+','+Math.round(94*(1-t))+','+(0.4+t*0.6)+')';
   }
   function strokeFor(t,isTR){
     if(isTR) return 'rgba(16,185,129,.85)';
-    return 'rgba(244,'+ Math.round(63*(1-t)) +','+ Math.round(94*(1-t)) +',.8)';
+    return 'rgba(244,'+Math.round(63*(1-t))+','+Math.round(94*(1-t))+',.8)';
   }
 
   function render(counts){
@@ -1626,48 +1659,38 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLega
     var max=vals.length?Math.max.apply(null,vals.concat([1])):1;
     var html='';
 
-    /* 1. TÜM ülkeler: veri yoksa faint ghost nokta */
+    /* 1. Tüm ülkeler — veri yoksa faint ghost */
     Object.keys(CENT).forEach(function(cc){
       var c=CENT[cc];
-      if(counts[cc]>0) return; // veri olanlar 2. pastta çizilir
-      html+='<circle cx="'+c.x+'" cy="'+c.y+'" r="3.5" '+
-        'fill="rgba(100,120,165,0.10)" stroke="rgba(148,163,184,0.22)" stroke-width="0.7"/>';
-      html+='<text pointer-events="none" x="'+c.x+'" y="'+(c.y+9)+
-        '" text-anchor="middle" font-size="4.8" font-family="Inter,sans-serif" '+
-        'fill="rgba(148,163,184,0.28)" font-weight="600">'+cc+'</text>';
+      if(counts[cc]>0) return;
+      html+='<circle cx="'+c.x+'" cy="'+c.y+'" r="3.5" fill="rgba(100,120,165,0.10)" stroke="rgba(148,163,184,0.22)" stroke-width="0.7"/>';
+      html+='<text pointer-events="none" x="'+c.x+'" y="'+(c.y+9)+'" text-anchor="middle" font-size="4.8" font-family="Inter,sans-serif" fill="rgba(148,163,184,0.28)" font-weight="600">'+cc+'</text>';
     });
 
-    /* 2. Veri olan ülkeler: orantılı bubble */
+    /* 2. Veri olan ülkeler — orantılı bubble */
     Object.keys(counts).forEach(function(cc){
       var c=CENT[cc]; if(!c) return;
-      var cnt=counts[cc];
-      if(cnt<=0) return;
+      var cnt=counts[cc]; if(cnt<=0) return;
       var t=max>0?cnt/max:0;
       var r=5+t*22;
-      var isTR=cc==='TR';
-      html+='<circle class="mc" cx="'+c.x+'" cy="'+c.y+'" r="'+r.toFixed(1)+
-        '" fill="'+colorFor(t,isTR)+'" stroke="'+strokeFor(t,isTR)+'" stroke-width="1.2" '+
-        'data-cc="'+cc+'" data-cnt="'+cnt+'"/>';
-      if(r>8){
-        html+='<text pointer-events="none" x="'+c.x+'" y="'+(c.y+4)+
-          '" text-anchor="middle" font-size="7" font-family="Inter,sans-serif" fill="rgba(241,245,249,.88)" font-weight="700">'+cc+'</text>';
-      }
+      var isTR=(cc==='TR');
+      html+='<circle class="mc" cx="'+c.x+'" cy="'+c.y+'" r="'+r.toFixed(1)+'" fill="'+colorFor(t,isTR)+'" stroke="'+strokeFor(t,isTR)+'" stroke-width="1.2" data-cc="'+cc+'" data-cnt="'+cnt+'"/>';
+      if(r>8) html+='<text pointer-events="none" x="'+c.x+'" y="'+(c.y+4)+'" text-anchor="middle" font-size="7" font-family="Inter,sans-serif" fill="rgba(241,245,249,.88)" font-weight="700">'+cc+'</text>';
     });
 
     g.innerHTML=html;
 
     g.querySelectorAll('circle.mc').forEach(function(el){
-      var cc=el.dataset.cc;
-      var c=CENT[cc];
-      el.addEventListener('mouseenter',function(e){
+      var cc=el.dataset.cc; var c=CENT[cc];
+      el.addEventListener('mouseenter',function(){
         var name=isEN?(EN_NAME[cc]||cc):(c?c.n:cc);
         tip.innerHTML='<strong>'+name+'</strong> — '+fmtK(parseInt(el.dataset.cnt,10))+' '+(isEN?'threats':'tehdit');
         tip.style.display='block';
       });
       el.addEventListener('mousemove',function(e){
-        var r=svgEl.getBoundingClientRect();
-        tip.style.left=(e.clientX-r.left+10)+'px';
-        tip.style.top=(e.clientY-r.top-36)+'px';
+        var rect=svgEl.getBoundingClientRect();
+        tip.style.left=(e.clientX-rect.left+10)+'px';
+        tip.style.top=(e.clientY-rect.top-36)+'px';
       });
       el.addEventListener('mouseleave',function(){ tip.style.display='none'; });
     });
@@ -1683,6 +1706,20 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLega
     render(counts);
   })
   .catch(function(){ render({TR:1}); });
+})();
+</script>
+
+<!-- ── BAŞA DÖN BUTONU ── -->
+<button id="back-to-top" aria-label="Başa dön" title="Başa dön">↑</button>
+
+<script>
+/* ── BACK TO TOP ── */
+(function(){
+  var btn=document.getElementById('back-to-top');
+  if(!btn) return;
+  function sync(){ btn.classList[window.scrollY>300?'add':'remove']('btt-visible'); }
+  window.addEventListener('scroll',sync,{passive:true});
+  btn.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
 })();
 </script>
 </body>
