@@ -375,6 +375,144 @@
       .footer-social, .footer-links { justify-content: center; }
     }
   
+    /* ── STICKY BANNER ── */
+    #sticky-banner {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 150;
+      background: rgba(14,21,39,0.97); backdrop-filter: blur(14px);
+      border-left: 3px solid var(--green);
+      border-bottom: 1px solid rgba(16,185,129,.25);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .6rem 1.5rem; gap: 1rem;
+      transform: translateY(-100%); transition: transform .35s ease;
+    }
+    #sticky-banner.visible { transform: translateY(0); }
+    #sticky-banner.hidden  { display: none; }
+    .banner-text { font-size: .82rem; color: var(--text); flex: 1; min-width: 0; }
+    .banner-text strong { color: var(--green); }
+    .banner-type-warning .banner-text strong { color: var(--yellow); }
+    .banner-close {
+      background: none; border: none; color: var(--dim); cursor: pointer;
+      font-size: 1.1rem; line-height: 1; padding: .25rem; flex-shrink: 0;
+      transition: color .2s;
+    }
+    .banner-close:hover { color: var(--text); }
+
+    /* ── URL DEMO ── */
+    .url-demo-wrap {
+      width: 100%; max-width: 580px; margin: 2rem auto 0;
+    }
+    .url-demo-row {
+      display: flex; gap: .625rem; align-items: stretch;
+    }
+    .url-demo-input {
+      flex: 1; min-width: 0;
+      background: rgba(30,41,59,0.9); border: 1.5px solid rgba(148,163,184,.2);
+      border-radius: 12px; padding: .8rem 1rem;
+      color: var(--text); font-family: inherit; font-size: .875rem;
+      outline: none; transition: border-color .2s;
+    }
+    .url-demo-input:focus { border-color: rgba(16,185,129,.5); }
+    .url-demo-input::placeholder { color: var(--dim); }
+    .url-demo-btn {
+      background: var(--green); color: #0F172A;
+      font-weight: 700; font-size: .875rem; padding: .8rem 1.375rem;
+      border: none; border-radius: 12px; cursor: pointer;
+      white-space: nowrap; transition: opacity .2s; font-family: inherit;
+    }
+    .url-demo-btn:hover:not(:disabled) { opacity: .85; }
+    .url-demo-btn:disabled { opacity: .5; cursor: default; }
+    .url-demo-result {
+      margin-top: .75rem; border-radius: 12px; padding: .875rem 1rem;
+      font-size: .82rem; display: none; border: 1px solid;
+    }
+    .url-demo-result.show { display: block; }
+    .url-demo-result.safe    { background: rgba(16,185,129,.08); border-color: rgba(16,185,129,.3); color: var(--green); }
+    .url-demo-result.warn    { background: rgba(251,191,36,.08); border-color: rgba(251,191,36,.3); color: var(--yellow); }
+    .url-demo-result.danger  { background: rgba(244,63,94,.08); border-color: rgba(244,63,94,.3); color: var(--red); }
+    .url-demo-result.loading { background: rgba(30,41,59,.8); border-color: var(--border); color: var(--dim); }
+    .url-demo-result.error   { background: rgba(30,41,59,.8); border-color: var(--border); color: var(--dim); }
+    .demo-res-row { display: flex; align-items: flex-start; gap: .625rem; }
+    .demo-res-icon { font-size: 1.25rem; flex-shrink: 0; line-height: 1.4; }
+    .demo-res-title { font-weight: 700; margin-bottom: .2rem; }
+    .demo-res-sub { color: var(--muted); font-size: .74rem; line-height: 1.5; }
+
+    /* ── ASIMETRIK FEATURES ── */
+    .feature-rows { display: flex; flex-direction: column; gap: 4rem; margin-top: 1.5rem; }
+    .feature-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 3.5rem; align-items: center;
+    }
+    .fr-icon-box {
+      background: rgba(30,41,59,0.85); border: 1px solid var(--border); border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 3rem 2rem; font-size: 4.5rem; text-align: center;
+      backdrop-filter: blur(8px); transition: background .2s, border-color .2s;
+      min-height: 180px;
+    }
+    .fr-icon-box:hover { background: rgba(38,51,72,.9); border-color: rgba(16,185,129,.25); }
+    .fr-lbl { font-size: .68rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--green); margin-bottom: .5rem; }
+    .fr-title { font-size: 1.35rem; font-weight: 800; letter-spacing: -.02em; margin-bottom: .75rem; }
+    .fr-desc { color: var(--muted); font-size: .88rem; line-height: 1.75; margin-bottom: .875rem; }
+    .fr-quote { font-size: .8rem; color: var(--green); font-style: italic; padding-left: .875rem; border-left: 2px solid rgba(16,185,129,.35); }
+    .feature-row.reverse .fr-icon-box { order: -1; }
+    @media (max-width: 680px) {
+      .feature-row { grid-template-columns: 1fr; gap: 1.5rem; }
+      .feature-row.reverse .fr-icon-box { order: 0; }
+      .fr-icon-box { min-height: 120px; font-size: 3.5rem; padding: 2rem; }
+    }
+
+    /* ── TEHDIT ISTATISTIKLERI ── */
+    .intel-stats-wrap { padding: 5rem 1.5rem; background: rgba(15,23,42,0.7); backdrop-filter: blur(10px); }
+    .intel-stats-inner { max-width: 860px; margin: 0 auto; }
+    .stats-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
+    .stats-col-lbl { font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--dim); margin-bottom: 1.25rem; }
+    .stat-bar-row { margin-bottom: .875rem; }
+    .stat-bar-meta { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: .35rem; }
+    .stat-bar-name { font-size: .82rem; font-weight: 500; color: var(--text); }
+    .stat-bar-num  { font-size: .74rem; color: var(--dim); }
+    .stat-bar-track { height: 5px; background: rgba(148,163,184,.1); border-radius: 3px; overflow: hidden; }
+    .stat-bar-fill { height: 100%; border-radius: 3px; width: 0; transition: width 1.2s cubic-bezier(.16,1,.3,1); }
+    .fill-usom      { background: var(--green); }
+    .fill-urlhaus   { background: #EAB308; }
+    .fill-openphish { background: #F97316; }
+    .fill-botvrij   { background: #8B5CF6; }
+    .fill-phishing  { background: #F43F5E; }
+    .fill-malware   { background: #EAB308; }
+    .fill-botnet    { background: #F97316; }
+    .fill-suspicious{ background: #8B5CF6; }
+    .fill-cyberattack{background: #EC4899; }
+    @media (max-width: 640px) { .stats-cols { grid-template-columns: 1fr; gap: 2rem; } }
+
+    /* ── DUNYA HARITASI ── */
+    .map-wrap { padding: 5rem 1.5rem; }
+    .map-inner { max-width: 1000px; margin: 0 auto; }
+    .map-container {
+      margin-top: 3rem; position: relative;
+      background: rgba(14,21,39,0.7); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden; backdrop-filter: blur(8px);
+    }
+    #world-svg { width: 100%; height: auto; display: block; }
+    .mc { cursor: pointer; transition: opacity .2s; }
+    .mc:hover { opacity: .75; }
+    #map-tip {
+      position: absolute; background: #0F172A; border: 1px solid rgba(16,185,129,.4);
+      border-radius: 8px; padding: .45rem .75rem; font-size: .74rem;
+      color: var(--text); pointer-events: none; display: none;
+      z-index: 20; white-space: nowrap; box-shadow: 0 6px 20px rgba(0,0,0,.7);
+    }
+    .map-legend { display: flex; align-items: center; gap: .625rem; padding: .875rem 1.25rem; flex-wrap: wrap; border-top: 1px solid var(--border); }
+    .legend-label { font-size: .7rem; color: var(--dim); }
+    .legend-bar { flex: 1; height: 6px; border-radius: 3px; min-width: 80px; max-width: 160px;
+      background: linear-gradient(to right, rgba(244,63,94,.2), rgba(244,63,94,1)); }
+    .legend-tr  { display: flex; align-items: center; gap: .375rem; font-size: .7rem; color: var(--green); margin-left: auto; }
+    .legend-tr-dot { width: 10px; height: 10px; border-radius: 2px; background: var(--green); }
+
+    /* ── SCROLL ANIMASYONLARI ── */
+    .fade-up { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up-d1 { transition-delay: .1s; }
+    .fade-up-d2 { transition-delay: .2s; }
+    .fade-up-d3 { transition-delay: .3s; }
+
     /* ── TOOLTIP ── */
     [data-tip] { cursor: default; }
     #sqr-tooltip {
@@ -398,6 +536,12 @@
   </style>
 </head>
 <body>
+
+<!-- ── STICKY BANNER ── -->
+<div id="sticky-banner" class="hidden" role="status" aria-live="polite">
+  <div class="banner-text" id="banner-text">Yükleniyor…</div>
+  <button class="banner-close" id="banner-close" aria-label="Kapat">✕</button>
+</div>
 
 <!-- ── CANVAS BACKGROUND ── -->
 <canvas id="threat-canvas"></canvas>
@@ -429,6 +573,7 @@
   </div>
   <ul class="nav-links">
     <li><a href="#features" data-en="Features">Özellikler</a></li>
+    <li><a href="#threat-stats" data-en="Stats">İstatistikler</a></li>
     <li><a href="#library" data-en="Library">Kütüphane</a></li>
     <li><a href="#how" data-en="How It Works">Nasıl Çalışır</a></li>
     <li><a href="#updates" data-en="What's New">Güncellemeler</a></li>
@@ -451,6 +596,7 @@
 <!-- MOBİL MENÜ -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="#features" data-en="Features">Özellikler</a>
+  <a href="#threat-stats" data-en="Stats">İstatistikler</a>
   <a href="#library" data-en="Library">Kütüphane</a>
   <a href="#how" data-en="How It Works">Nasıl Çalışır</a>
   <a href="#updates" data-en="What's New">Güncellemeler</a>
@@ -493,8 +639,21 @@
     QR kodları, linkleri ve SMS mesajlarındaki adresleri kayıtlarımla karşılaştırıyorum. Tehlikeli mi? Güvenli mi? Size söylerim.
   </p>
 
-  <span class="btn-soon">📱 <span data-en="Coming to Play Store">Yakında Play Store'da</span></span>
+  <!-- URL Demo -->
+  <div class="url-demo-wrap">
+    <div class="url-demo-row">
+      <input type="url" id="demo-url" class="url-demo-input"
+        placeholder="https://bit.ly/… veya herhangi bir URL deneyin"
+        data-placeholder-en="Try https://bit.ly/… or any URL"
+        autocomplete="off" autocorrect="off" spellcheck="false">
+      <button class="url-demo-btn" id="demo-btn" data-en="Analyze">Analiz Et</button>
+    </div>
+    <div class="url-demo-result" id="demo-result"></div>
+  </div>
+
+  <span class="btn-soon" style="margin-top:2rem">📱 <span data-en="Coming to Play Store">Yakında Play Store'da</span></span>
   <p class="hero-note" data-en="Coming for Android · Free">Android için geliyor · Ücretsiz</p>
+  <p class="hero-note" style="margin-top:.3rem;color:var(--green);opacity:.85" data-en="Opening to everyone August 2026">Ağustos 2026'da herkese açılıyor</p>
 </section>
 
 <!-- ── STATS ── -->
@@ -515,37 +674,52 @@
   <p class="sec-lbl" data-en="What I do">Neler yapıyorum</p>
   <h2 class="sec-title" data-en="Comprehensive Threat Protection.">Kapsamlı Tehdit Koruması.</h2>
   <p class="sec-desc" data-en="Scan a QR code, paste a link, or point your camera — I'll handle the rest.">QR kodu okutun, linki yapıştırın ya da kameranızı tutun — gerisini ben hallederim.</p>
-  <div class="features">
-    <div class="fc">
-      <div class="fc-icon">🔲</div>
-      <h3 class="fc-title" data-en="QR Code Scan">QR Kod Taraması</h3>
-      <p class="fc-desc" data-en="Point your camera at the QR code. I'll tell you where it goes and what's there — before you open it.">Kameranızı QR koda tutun. Kod hangi adrese gidiyor, orada ne var — açmadan önce söylerim.</p>
-      <p class="fc-quote" data-en='"Let me check before you scan."'>"Okutmadan önce ben bakayım."</p>
+  <div class="feature-rows">
+
+    <!-- Row 1: metin sol / ikon sağ -->
+    <div class="feature-row fade-up">
+      <div class="fr-text">
+        <p class="fr-lbl" data-en="QR Code">QR Kod</p>
+        <h3 class="fr-title" data-en="Scan before you open.">Açmadan önce tara.</h3>
+        <p class="fr-desc" data-en="Point your camera at the QR code. I'll tell you where it leads and what's there — before you tap.">Kameranızı QR koda tutun. Kod hangi adrese gidiyor, orada ne var — açmadan önce söylerim.</p>
+        <p class="fr-quote" data-en='"Let me check before you scan."'>"Okutmadan önce ben bakayım."</p>
+      </div>
+      <div class="fr-icon-box">🔲</div>
     </div>
-    <div class="fc">
-      <div class="fc-icon">🔗</div>
-      <h3 class="fc-title" data-en="Link Analysis">Link Analizi</h3>
-      <p class="fc-desc" data-en="When you copy a link I catch it automatically. I also unwrap shortened links to reveal what's behind them.">Bir link kopyaladığınızda otomatik yakalıyorum. Kısaltılmış linklerin arkasını da açıp analiz ediyorum.</p>
-      <p class="fc-quote" data-en='"Checking my records..."'>"Kayıtlarıma bakıyorum..."</p>
+
+    <!-- Row 2: ikon sol / metin sağ -->
+    <div class="feature-row reverse fade-up fade-up-d1">
+      <div class="fr-text">
+        <p class="fr-lbl" data-en="Link Analysis">Link Analizi</p>
+        <h3 class="fr-title" data-en="Copy a link, I'm already on it.">Linki kopyala, ben zaten bakıyorum.</h3>
+        <p class="fr-desc" data-en="I catch clipboard links automatically. Shortened URLs? I unwrap every redirect to find what's really behind them.">Bir link kopyaladığınızda otomatik yakalıyorum. Kısaltılmış linkler mi? Her yönlendirmeyi takip edip arkasını açıyorum.</p>
+        <p class="fr-quote" data-en='"Checking my records…"'>"Kayıtlarıma bakıyorum…"</p>
+      </div>
+      <div class="fr-icon-box">🔗</div>
     </div>
-    <div class="fc">
-      <div class="fc-icon">📱</div>
-      <h3 class="fc-title" data-en="SMS Protection">SMS Koruması</h3>
-      <p class="fc-desc" data-en="Copy links from SMS messages — I'm already watching. I'll warn you if anything dangerous shows up.">SMS ve mesajlardaki linkleri panoya kopyalayın — ben zaten izliyorum. Tehlikeli bir şey varsa uyarırım.</p>
-      <p class="fc-quote" data-en='"I catch clipboard links."'>"Panodaki linkleri yakalıyorum."</p>
+
+    <!-- Row 3: metin sol / ikon sağ -->
+    <div class="feature-row fade-up fade-up-d2">
+      <div class="fr-text">
+        <p class="fr-lbl" data-en="SMS Protection">SMS Koruması</p>
+        <h3 class="fr-title" data-en="SMS links don't slip through.">SMS linkleri kaçamaz.</h3>
+        <p class="fr-desc" data-en="Links from messages copied to your clipboard are caught instantly. If anything dangerous shows up, I warn you before it's too late.">Mesajlardan panoya kopyalanan linkler anında yakalanır. Tehlikeli bir şey varsa, çok geç olmadan uyarırım.</p>
+        <p class="fr-quote" data-en='"I catch clipboard links."'>"Panodaki linkleri yakalıyorum."</p>
+      </div>
+      <div class="fr-icon-box">📱</div>
     </div>
-    <div class="fc">
-      <div class="fc-icon">🔗</div>
-      <h3 class="fc-title" data-en="Redirect Chain Tracking">Yönlendirme Zinciri</h3>
-      <p class="fc-desc" data-en="Short links hide their real destination. I follow every redirect — the final URL is what I analyze.">Kısa linkler gerçek hedefi gizler. Her yönlendirmeyi takip ediyorum — analiz ettiğim asıl adres.</p>
-      <p class="fc-quote" data-en='"The real destination is what matters."'>"Asıl hedefe bakıyorum."</p>
+
+    <!-- Row 4: ikon sol / metin sağ -->
+    <div class="feature-row reverse fade-up fade-up-d1">
+      <div class="fr-text">
+        <p class="fr-lbl" data-en="Real-Time Intelligence">Gerçek Zamanlı İstihbarat</p>
+        <h3 class="fr-title" data-en="Four sources. One answer.">Dört kaynak. Tek cevap.</h3>
+        <p class="fr-desc" data-en="USOM, URLhaus, OpenPhish and BOTVRIJ — four live threat feeds, cross-checked simultaneously, updated every hour.">USOM, URLhaus, OpenPhish ve BOTVRIJ — saatlik güncellenen dört tehdit kaynağını aynı anda tarıyorum.</p>
+        <p class="fr-quote" data-en='"Four sources, one answer."'>"Dört kaynaktan tek cevap."</p>
+      </div>
+      <div class="fr-icon-box">⚡</div>
     </div>
-    <div class="fc">
-      <div class="fc-icon">⚡</div>
-      <h3 class="fc-title" data-en="Real-Time Intelligence">Gerçek Zamanlı İstihbarat</h3>
-      <p class="fc-desc" data-en="USOM, URLhaus, OpenPhish and BOTVRIJ — four live threat feeds, updated every hour.">USOM, URLhaus, OpenPhish ve BOTVRIJ — saatlik güncellenen dört tehdit kaynağından canlı veri.</p>
-      <p class="fc-quote" data-en='"Four sources, one answer."'>"Dört kaynaktan tek cevap."</p>
-    </div>
+
   </div>
 </section>
 
@@ -575,6 +749,77 @@
         </div>
         <div class="phase-title" data-en="Safe.">Güvende.</div>
         <p class="phase-desc" data-en="No threat records for this address. You can open the link.">Bu adresle ilgili herhangi bir tehdit kaydım yok. Bağlantıyı açabilirsin.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── TEHDIT ISTATISTIKLERI ── -->
+<div class="intel-stats-wrap" id="threat-stats">
+  <div class="intel-stats-inner">
+    <p class="sec-lbl fade-up" data-en="Live Data">Canlı Veri</p>
+    <h2 class="sec-title fade-up fade-up-d1" data-en="Threat Intel by Source &amp; Category">Kaynak ve Kategori Bazlı Tehdit Dağılımı</h2>
+    <p class="sec-desc fade-up fade-up-d2" data-en="Real-time breakdown of records tracked across all intelligence feeds.">Tüm istihbarat kaynaklarındaki kayıtların gerçek zamanlı dağılımı.</p>
+    <div class="stats-cols fade-up">
+      <div>
+        <p class="stats-col-lbl" data-en="By Source">Kaynak Bazlı</p>
+        <div id="src-bars">
+          <div class="stat-bar-row"><div class="stat-bar-meta"><span class="stat-bar-name">USOM</span><span class="stat-bar-num" id="cnt-usom">—</span></div><div class="stat-bar-track"><div class="stat-bar-fill fill-usom" id="bar-usom"></div></div></div>
+          <div class="stat-bar-row"><div class="stat-bar-meta"><span class="stat-bar-name">URLhaus</span><span class="stat-bar-num" id="cnt-urlhaus">—</span></div><div class="stat-bar-track"><div class="stat-bar-fill fill-urlhaus" id="bar-urlhaus"></div></div></div>
+          <div class="stat-bar-row"><div class="stat-bar-meta"><span class="stat-bar-name">OpenPhish</span><span class="stat-bar-num" id="cnt-openphish">—</span></div><div class="stat-bar-track"><div class="stat-bar-fill fill-openphish" id="bar-openphish"></div></div></div>
+          <div class="stat-bar-row"><div class="stat-bar-meta"><span class="stat-bar-name">BOTVRIJ</span><span class="stat-bar-num" id="cnt-botvrij">—</span></div><div class="stat-bar-track"><div class="stat-bar-fill fill-botvrij" id="bar-botvrij"></div></div></div>
+        </div>
+      </div>
+      <div>
+        <p class="stats-col-lbl" data-en="By Category">Kategori Bazlı</p>
+        <div id="cat-bars">
+          <div class="stat-bar-row"><div class="stat-bar-meta"><span class="stat-bar-name" data-en="Phishing">Oltalama</span><span class="stat-bar-num" id="cnt-phishing">—</span></div><div class="stat-bar-track"><div class="stat-bar-fill fill-phishing" id="bar-phishing"></div></div></div>
+          <div class="stat-bar-row"><div class="stat-bar-meta"><span class="stat-bar-name" data-en="Malware">Kötü Amaçlı Yazılım</span><span class="stat-bar-num" id="cnt-malware">—</span></div><div class="stat-bar-track"><div class="stat-bar-fill fill-malware" id="bar-malware"></div></div></div>
+          <div class="stat-bar-row"><div class="stat-bar-meta"><span class="stat-bar-name" data-en="Botnet">Botnet</span><span class="stat-bar-num" id="cnt-botnet">—</span></div><div class="stat-bar-track"><div class="stat-bar-fill fill-botnet" id="bar-botnet"></div></div></div>
+          <div class="stat-bar-row"><div class="stat-bar-meta"><span class="stat-bar-name" data-en="Suspicious">Şüpheli</span><span class="stat-bar-num" id="cnt-suspicious">—</span></div><div class="stat-bar-track"><div class="stat-bar-fill fill-suspicious" id="bar-suspicious"></div></div></div>
+          <div class="stat-bar-row"><div class="stat-bar-meta"><span class="stat-bar-name" data-en="Cyberattack">Siber Saldırı</span><span class="stat-bar-num" id="cnt-cyberattack">—</span></div><div class="stat-bar-track"><div class="stat-bar-fill fill-cyberattack" id="bar-cyberattack"></div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── DUNYA HARITASI ── -->
+<div class="map-wrap" id="threat-map">
+  <div class="map-inner">
+    <p class="sec-lbl fade-up" data-en="Global Threat Map">Küresel Tehdit Haritası</p>
+    <h2 class="sec-title fade-up fade-up-d1" data-en="Where threats originate.">Tehditler nereden geliyor.</h2>
+    <p class="sec-desc fade-up fade-up-d2" data-en="Top 20 countries by threat record count. Turkey highlighted in green — home of USOM integration.">Tehdit kaydı sayısına göre ilk 20 ülke. Türkiye yeşil — USOM entegrasyonunun merkezi.</p>
+    <div class="map-container fade-up">
+      <div id="map-tip"></div>
+      <!-- SVG harita JS tarafından doldurulur -->
+      <svg id="world-svg" viewBox="0 0 960 480" xmlns="http://www.w3.org/2000/svg">
+        <!-- Okyanus arka planı -->
+        <rect width="960" height="480" fill="rgba(14,21,39,0.5)"/>
+        <!-- Kıtalar (basitleştirilmiş) -->
+        <!-- Kuzey Amerika -->
+        <path d="M60,60 L210,50 L235,90 L245,155 L220,195 L195,210 L160,225 L125,215 L85,185 L62,145 L55,100 Z" fill="rgba(30,41,59,0.6)" stroke="rgba(148,163,184,.12)" stroke-width="1"/>
+        <!-- Güney Amerika -->
+        <path d="M170,235 L235,220 L265,250 L275,305 L265,365 L245,410 L215,435 L185,430 L162,395 L150,340 L148,280 Z" fill="rgba(30,41,59,0.6)" stroke="rgba(148,163,184,.12)" stroke-width="1"/>
+        <!-- Avrupa -->
+        <path d="M420,50 L510,45 L520,80 L510,115 L490,130 L460,128 L435,115 L415,90 Z" fill="rgba(30,41,59,0.6)" stroke="rgba(148,163,184,.12)" stroke-width="1"/>
+        <!-- Afrika -->
+        <path d="M435,140 L510,130 L535,155 L540,215 L530,285 L510,340 L480,375 L450,370 L425,330 L410,265 L410,195 Z" fill="rgba(30,41,59,0.6)" stroke="rgba(148,163,184,.12)" stroke-width="1"/>
+        <!-- Asya -->
+        <path d="M515,45 L770,40 L800,70 L810,120 L790,175 L760,195 L720,200 L680,185 L640,190 L600,175 L560,160 L530,140 L515,110 Z" fill="rgba(30,41,59,0.6)" stroke="rgba(148,163,184,.12)" stroke-width="1"/>
+        <!-- Avustralya -->
+        <path d="M720,300 L810,290 L840,315 L840,365 L810,390 L760,390 L720,365 L705,330 Z" fill="rgba(30,41,59,0.6)" stroke="rgba(148,163,184,.12)" stroke-width="1"/>
+        <!-- Ülke bubble'ları JS tarafından eklenir -->
+        <g id="map-bubbles"></g>
+      </svg>
+      <div class="map-legend">
+        <span class="legend-label" data-en="Low">Az</span>
+        <div class="legend-bar"></div>
+        <span class="legend-label" data-en="High">Çok</span>
+        <div class="legend-tr">
+          <div class="legend-tr-dot"></div>
+          <span data-en="Turkey — USOM">Türkiye — USOM</span>
+        </div>
       </div>
     </div>
   </div>
@@ -652,6 +897,7 @@
   <p class="cta-sub" data-en="Coming to Android. Free.">Yakında Android'de. Ücretsiz.</p>
   <span class="btn-soon">📱 <span data-en="Coming to Play Store">Play Store'da Yakında</span></span>
   <p class="hero-note" style="margin-top:.75rem" data-en="iOS coming too">iOS için de geliyor</p>
+  <p class="hero-note" style="margin-top:.3rem;color:var(--green);opacity:.85" data-en="Opening to everyone August 2026">Ağustos 2026'da herkese açılıyor</p>
 </div>
 
 <!-- ── UPDATES / SON GÜNCELLEMELER ── -->
@@ -1125,6 +1371,293 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLega
       esc(isEN ? 'Could not load updates.' : 'Güncellemeler yüklenemedi.') + '</div>';
   });
 }());
+</script>
+
+<script>
+/* ── CANVAS SCROLL OPACITY ── */
+(function(){
+  var canvas = document.getElementById('threat-canvas');
+  if(!canvas) return;
+  var ticking = false;
+  function updateOp(){
+    var sy = window.scrollY || window.pageYOffset;
+    var vh = window.innerHeight;
+    var op;
+    if(sy < vh){ op = 1 - (sy/vh)*0.58; }
+    else { var total = Math.max(document.body.scrollHeight-vh,1); op = 0.42 - ((sy-vh)/total)*0.3; }
+    canvas.style.opacity = Math.max(0.12, Math.min(1, op));
+    ticking = false;
+  }
+  window.addEventListener('scroll', function(){ if(!ticking){ requestAnimationFrame(updateOp); ticking=true; } }, {passive:true});
+})();
+</script>
+
+<script>
+/* ── SCROLL ANIMASYONLARI ── */
+(function(){
+  if(!('IntersectionObserver' in window)){
+    document.querySelectorAll('.fade-up').forEach(function(el){ el.classList.add('visible'); });
+    return;
+  }
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(function(el){ obs.observe(el); });
+})();
+</script>
+
+<script>
+/* ── STICKY BANNER ── */
+(function(){
+  var SUPA_URL = 'https://bvunvlcwqsjbozmjhyvi.supabase.co';
+  var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2dW52bGN3cXNqYm96bWpoeXZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MzUyMjYsImV4cCI6MjA5NDExMTIyNn0.hyVKwNbYcbTe-Er6Tt8zDUAk7S8CUQi1hAyijEmCvpo';
+  var DKEY = 'sqrseal_banner_v_';
+  var isEN = window._isEN;
+  var bannerEl = document.getElementById('sticky-banner');
+  var textEl   = document.getElementById('banner-text');
+  var closeBtn = document.getElementById('banner-close');
+  var navEl    = document.querySelector('nav');
+  if(!bannerEl) return;
+
+  function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function dismiss(){
+    bannerEl.classList.remove('visible');
+    if(navEl) navEl.style.top = '';
+    setTimeout(function(){ bannerEl.classList.add('hidden'); }, 380);
+  }
+
+  function show(ann){
+    if(localStorage.getItem(DKEY+ann.id)) return;
+    var title = isEN ? (ann.title_en||ann.title_tr) : (ann.title_tr||ann.title_en);
+    var icon  = ann.type==='warning'?'⚠️':ann.type==='feature'?'✨':'ℹ️';
+    textEl.innerHTML = icon + ' <strong>' + esc(title) + '</strong>';
+    if(ann.type==='warning') bannerEl.classList.add('banner-type-warning');
+    bannerEl.classList.remove('hidden');
+    setTimeout(function(){
+      bannerEl.classList.add('visible');
+      if(navEl) navEl.style.top = bannerEl.offsetHeight + 'px';
+    }, 60);
+    closeBtn.addEventListener('click', function(){
+      localStorage.setItem(DKEY+ann.id,'1');
+      dismiss();
+    }, {once:true});
+  }
+
+  fetch(SUPA_URL+'/rest/v1/announcements?is_active=eq.true&order=published_at.desc&limit=1&select=id,title_tr,title_en,type',
+    { headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY} })
+  .then(function(r){ return r.json(); })
+  .then(function(d){ if(Array.isArray(d)&&d.length) show(d[0]); })
+  .catch(function(){});
+})();
+</script>
+
+<script>
+/* ── URL DEMO ── */
+(function(){
+  var SUPA_URL = 'https://bvunvlcwqsjbozmjhyvi.supabase.co';
+  var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2dW52bGN3cXNqYm96bWpoeXZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MzUyMjYsImV4cCI6MjA5NDExMTIyNn0.hyVKwNbYcbTe-Er6Tt8zDUAk7S8CUQi1hAyijEmCvpo';
+  var isEN = window._isEN;
+  var input  = document.getElementById('demo-url');
+  var btn    = document.getElementById('demo-btn');
+  var result = document.getElementById('demo-result');
+  if(!input||!btn||!result) return;
+  if(isEN && input.dataset.placeholderEn) input.placeholder = input.dataset.placeholderEn;
+
+  var CAT_TR = {phishing:'Oltalama',malware:'Zararlı Yazılım',botnet:'Botnet',suspicious:'Şüpheli',cyberattack:'Siber Saldırı'};
+
+  function setResult(cls,icon,title,sub){
+    result.className='url-demo-result show '+cls;
+    result.innerHTML='<div class="demo-res-row"><span class="demo-res-icon">'+icon+'</span>'+
+      '<div><div class="demo-res-title">'+title+'</div>'+
+      (sub?'<div class="demo-res-sub">'+sub+'</div>':'')+
+      '</div></div>';
+  }
+
+  function analyze(){
+    var url=input.value.trim();
+    if(!url) return;
+    if(!/^https?:\/\//i.test(url)){
+      if(/^www\./i.test(url)) url='https://'+url;
+      else{ setResult('error','⚠️',isEN?'Enter a valid URL':'Geçerli bir URL girin',isEN?'Example: https://example.com':'Örnek: https://example.com'); return; }
+    }
+    btn.disabled=true;
+    setResult('loading','⏳',isEN?'Analyzing…':'Analiz ediliyor…','');
+    fetch(SUPA_URL+'/functions/v1/check-threat',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+SUPA_KEY},
+      body:JSON.stringify({url:url})
+    })
+    .then(function(r){ return r.json(); })
+    .then(function(d){
+      btn.disabled=false;
+      if(d.error){ setResult('error','⚠️',isEN?'Could not analyze':'Analiz edilemedi',d.error); return; }
+      var score=d.riskScore||0;
+      var cat=d.category?(isEN?d.category:(CAT_TR[d.category]||d.category)):'';
+      var srcs=(d.sources||[]).join(', ');
+      if(!d.isSafe||d.blockedByAuthority){
+        var parts=[];
+        if(cat) parts.push((isEN?'Category: ':'Kategori: ')+cat);
+        if(srcs) parts.push((isEN?'Source: ':'Kaynak: ')+srcs);
+        setResult('danger','🔴',isEN?'Dangerous link detected':'Tehlikeli bağlantı tespit edildi',parts.join(' · ')||(isEN?'Blocked by authority':'Yetkili kaynak engelledi'));
+      } else if(score>=25){
+        setResult('warn','🟡',isEN?'Suspicious — proceed with caution':'Şüpheli — dikkatli olun',(isEN?'Risk score: ':'Risk skoru: ')+score+(srcs?' · '+srcs:''));
+      } else {
+        setResult('safe','🟢',isEN?'No threat found — You\'re safe':'Tehdit bulunamadı — Güvendesiniz',d.redirectedTo?(isEN?'Final URL: ':'Son adres: ')+d.redirectedTo:'');
+      }
+    })
+    .catch(function(){ btn.disabled=false; setResult('error','⚠️',isEN?'Connection error':'Bağlantı hatası',isEN?'Please try again.':'Lütfen tekrar deneyin.'); });
+  }
+
+  btn.addEventListener('click',analyze);
+  input.addEventListener('keydown',function(e){ if(e.key==='Enter') analyze(); });
+})();
+</script>
+
+<script>
+/* ── THREAT STATS BARS ── */
+(function(){
+  var SUPA_URL='https://bvunvlcwqsjbozmjhyvi.supabase.co';
+  var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2dW52bGN3cXNqYm96bWpoeXZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MzUyMjYsImV4cCI6MjA5NDExMTIyNn0.hyVKwNbYcbTe-Er6Tt8zDUAk7S8CUQi1hAyijEmCvpo';
+
+  function fmtK(n){ return n>=1000?(n/1000).toFixed(1).replace('.0','')+'K':String(n); }
+
+  function countHead(filter){
+    return fetch(SUPA_URL+'/rest/v1/blacklisted_domains?'+filter+'&select=domain&limit=0',{
+      method:'HEAD',
+      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Prefer':'count=exact'}
+    }).then(function(r){
+      var cr=r.headers.get('Content-Range')||'';
+      var t=parseInt(cr.split('/')[1],10);
+      return isNaN(t)?0:t;
+    }).catch(function(){ return 0; });
+  }
+
+  function applyBars(results){
+    var max=Math.max.apply(null,results.map(function(r){ return r.count; }));
+    results.forEach(function(r){
+      var cnt=document.getElementById('cnt-'+r.key);
+      var bar=document.getElementById('bar-'+r.key);
+      if(cnt) cnt.textContent=fmtK(r.count);
+      if(bar) setTimeout(function(){ bar.style.width=(max>0?Math.max(2,r.count/max*100):0)+'%'; },120);
+    });
+  }
+
+  var srcQ=[
+    {key:'usom',      f:'source=in.(USOM_Local,USOM_Local_IP)'},
+    {key:'urlhaus',   f:'source=eq.URLhaus_Malware'},
+    {key:'openphish', f:'source=eq.OpenPhish_Live'},
+    {key:'botvrij',   f:'source=eq.BOTVRIJ_OSINT'},
+  ];
+  var catQ=[
+    {key:'phishing',    f:'metadata->>category=eq.phishing'},
+    {key:'malware',     f:'metadata->>category=eq.malware'},
+    {key:'botnet',      f:'metadata->>category=eq.botnet'},
+    {key:'suspicious',  f:'metadata->>category=eq.suspicious'},
+    {key:'cyberattack', f:'metadata->>category=eq.cyberattack'},
+  ];
+
+  Promise.all(srcQ.map(function(q){ return countHead(q.f).then(function(c){ return {key:q.key,count:c}; }); }))
+    .then(applyBars);
+  Promise.all(catQ.map(function(q){ return countHead(q.f).then(function(c){ return {key:q.key,count:c}; }); }))
+    .then(applyBars);
+})();
+</script>
+
+<script>
+/* ── WORLD MAP ── */
+(function(){
+  var SUPA_URL='https://bvunvlcwqsjbozmjhyvi.supabase.co';
+  var SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2dW52bGN3cXNqYm96bWpoeXZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MzUyMjYsImV4cCI6MjA5NDExMTIyNn0.hyVKwNbYcbTe-Er6Tt8zDUAk7S8CUQi1hAyijEmCvpo';
+  var isEN=window._isEN;
+  var CENT={
+    TR:{x:573,y:136,n:'Türkiye'},    RU:{x:700,y:80, n:'Rusya'},
+    CN:{x:755,y:150,n:'Çin'},        US:{x:213,y:133,n:'ABD'},
+    DE:{x:507,y:104,n:'Almanya'},    NL:{x:494,y:98, n:'Hollanda'},
+    GB:{x:459,y:96, n:'Birleşik Krallık'}, FR:{x:485,y:117,n:'Fransa'},
+    UA:{x:562,y:108,n:'Ukrayna'},    RO:{x:547,y:117,n:'Romanya'},
+    PL:{x:533,y:101,n:'Polonya'},    IR:{x:621,y:155,n:'İran'},
+    IN:{x:691,y:187,n:'Hindistan'}, KR:{x:821,y:141,n:'G. Kore'},
+    JP:{x:848,y:141,n:'Japonya'},   BR:{x:344,y:277,n:'Brezilya'},
+    AU:{x:837,y:309,n:'Avustralya'},CA:{x:213,y:80, n:'Kanada'},
+    VN:{x:763,y:200,n:'Vietnam'},   NG:{x:501,y:213,n:'Nijerya'},
+    ID:{x:780,y:253,n:'Endonezya'}, EG:{x:560,y:168,n:'Mısır'},
+    MX:{x:208,y:176,n:'Meksika'},   TH:{x:747,y:200,n:'Tayland'},
+    ZA:{x:547,y:317,n:'G. Afrika'},
+  };
+  var EN_NAME={
+    TR:'Turkey',RU:'Russia',CN:'China',US:'USA',DE:'Germany',NL:'Netherlands',
+    GB:'United Kingdom',FR:'France',UA:'Ukraine',RO:'Romania',PL:'Poland',
+    IR:'Iran',IN:'India',KR:'South Korea',JP:'Japan',BR:'Brazil',AU:'Australia',
+    CA:'Canada',VN:'Vietnam',NG:'Nigeria',ID:'Indonesia',EG:'Egypt',
+    MX:'Mexico',TH:'Thailand',ZA:'South Africa'
+  };
+
+  var tip=document.getElementById('map-tip');
+  var g=document.getElementById('map-bubbles');
+  var svgEl=document.getElementById('world-svg');
+  if(!g||!svgEl) return;
+
+  function fmtK(n){ return n>=1000?(n/1000).toFixed(1).replace('.0','')+'K':String(n); }
+
+  function colorFor(t,isTR){
+    if(isTR) return 'rgba(16,185,129,'+(0.4+t*0.6)+')';
+    // açık kırmızı → koyu kırmızı
+    return 'rgba(244,'+ Math.round(63*(1-t)) +','+ Math.round(94*(1-t)) +','+(0.4+t*0.6)+')';
+  }
+  function strokeFor(t,isTR){
+    if(isTR) return 'rgba(16,185,129,.85)';
+    return 'rgba(244,'+ Math.round(63*(1-t)) +','+ Math.round(94*(1-t)) +',.8)';
+  }
+
+  function render(counts){
+    var vals=Object.values(counts);
+    var max=vals.length?Math.max.apply(null,vals):1;
+    var html='';
+    Object.keys(counts).forEach(function(cc){
+      var c=CENT[cc]; if(!c) return;
+      var cnt=counts[cc];
+      var t=max>0?cnt/max:0;
+      var r=5+t*20;
+      var isTR=cc==='TR';
+      html+='<circle class="mc" cx="'+c.x+'" cy="'+c.y+'" r="'+r.toFixed(1)+
+        '" fill="'+colorFor(t,isTR)+'" stroke="'+strokeFor(t,isTR)+'" stroke-width="1.2" '+
+        'data-cc="'+cc+'" data-cnt="'+cnt+'"/>';
+      if(r>9){
+        html+='<text pointer-events="none" x="'+c.x+'" y="'+(c.y+4)+
+          '" text-anchor="middle" font-size="7" font-family="Inter,sans-serif" fill="rgba(241,245,249,.8)" font-weight="700">'+cc+'</text>';
+      }
+    });
+    g.innerHTML=html;
+
+    g.querySelectorAll('circle.mc').forEach(function(el){
+      var cc=el.dataset.cc;
+      var c=CENT[cc];
+      el.addEventListener('mouseenter',function(e){
+        var name=isEN?(EN_NAME[cc]||cc):(c?c.n:cc);
+        tip.innerHTML='<strong>'+name+'</strong> — '+fmtK(parseInt(el.dataset.cnt,10))+' '+(isEN?'threats':'tehdit');
+        tip.style.display='block';
+      });
+      el.addEventListener('mousemove',function(e){
+        var r=svgEl.getBoundingClientRect();
+        tip.style.left=(e.clientX-r.left+10)+'px';
+        tip.style.top=(e.clientY-r.top-36)+'px';
+      });
+      el.addEventListener('mouseleave',function(){ tip.style.display='none'; });
+    });
+  }
+
+  fetch(SUPA_URL+'/rest/v1/blacklisted_domains?country_code=not.is.null&select=country_code&limit=5000',
+    {headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY}})
+  .then(function(r){ return r.json(); })
+  .then(function(rows){
+    var counts={TR:0};
+    if(Array.isArray(rows)) rows.forEach(function(r){ if(r.country_code&&CENT[r.country_code]) counts[r.country_code]=(counts[r.country_code]||0)+1; });
+    if(!counts.TR) counts.TR=1;
+    render(counts);
+  })
+  .catch(function(){ render({TR:1}); });
+})();
 </script>
 </body>
 </html>
