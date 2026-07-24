@@ -50,7 +50,7 @@
 
     /* All content above canvas */
     nav, section, .hero, .stats, .sec, .phase-demo,
-    .how-wrap, .library-wrap, .trust-wrap, .cta-wrap, footer {
+    .how-wrap, .library-wrap, .trust-wrap, .cta-wrap, .updates-wrap, footer {
       position: relative;
       z-index: 1;
     }
@@ -257,6 +257,25 @@
     .cta-h { font-size: clamp(2rem,5vw,3.5rem); font-weight: 900; letter-spacing: -.04em; margin-bottom: 1rem; }
     .cta-sub { color: var(--muted); margin-bottom: 2.5rem; }
 
+    /* ── ANNOUNCEMENTS ── */
+    .updates-wrap { padding: 5rem 1.5rem; }
+    .updates-inner { max-width: 760px; margin: 0 auto; }
+    .ann-list { display: flex; flex-direction: column; gap: .875rem; margin-top: 2.5rem; }
+    .ann-card {
+      background: rgba(30,41,59,0.85); border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.125rem 1.375rem; display: flex; gap: 1rem; align-items: flex-start;
+      backdrop-filter: blur(8px); transition: border-color .2s, background .2s;
+    }
+    .ann-card:hover { border-color: rgba(16,185,129,.25); background: rgba(38,51,72,0.9); }
+    .ann-card.type-feature { border-color: rgba(16,185,129,.15); }
+    .ann-card.type-warning { border-color: rgba(251,191,36,.15); }
+    .ann-icon { font-size: 1.35rem; flex-shrink: 0; line-height: 1.5; }
+    .ann-body { flex: 1; min-width: 0; }
+    .ann-title { font-size: .9rem; font-weight: 700; color: var(--text); margin-bottom: .25rem; }
+    .ann-text { font-size: .82rem; color: var(--muted); line-height: 1.65; }
+    .ann-date { font-size: .7rem; color: var(--dim); margin-top: .5rem; letter-spacing: .02em; }
+    .ann-loading, .ann-empty { text-align: center; color: var(--dim); padding: 2.5rem; font-size: .875rem; }
+
     /* ── FOOTER ── */
     footer {
       border-top: 1px solid var(--border); padding: 2rem 2rem;
@@ -412,6 +431,7 @@
     <li><a href="#features" data-en="Features">Özellikler</a></li>
     <li><a href="#library" data-en="Library">Kütüphane</a></li>
     <li><a href="#how" data-en="How It Works">Nasıl Çalışır</a></li>
+    <li><a href="#updates" data-en="What's New">Güncellemeler</a></li>
     <li>
       <div class="nav-social">
         <a href="https://instagram.com/sqrseal" target="_blank" title="Instagram">
@@ -433,6 +453,7 @@
   <a href="#features" data-en="Features">Özellikler</a>
   <a href="#library" data-en="Library">Kütüphane</a>
   <a href="#how" data-en="How It Works">Nasıl Çalışır</a>
+  <a href="#updates" data-en="What's New">Güncellemeler</a>
   <div class="mob-social">
     <a href="https://instagram.com/sqrseal" target="_blank" style="color:var(--dim)">Instagram</a>
     <a href="https://youtube.com/@sqrseal" target="_blank" style="color:var(--dim)">YouTube</a>
@@ -631,6 +652,18 @@
   <p class="cta-sub" data-en="Coming to Android. Free.">Yakında Android'de. Ücretsiz.</p>
   <span class="btn-soon">📱 <span data-en="Coming to Play Store">Play Store'da Yakında</span></span>
   <p class="hero-note" style="margin-top:.75rem" data-en="iOS coming too">iOS için de geliyor</p>
+</div>
+
+<!-- ── UPDATES / SON GÜNCELLEMELER ── -->
+<div class="updates-wrap" id="updates">
+  <div class="updates-inner">
+    <p class="sec-lbl" id="upd-lbl">Son Güncellemeler</p>
+    <h2 class="sec-title" id="upd-title">Neler Değişti?</h2>
+    <p class="sec-desc" id="upd-desc">Uygulama güncellemeleri ve duyurular</p>
+    <div id="ann-list" class="ann-list">
+      <div class="ann-loading">⟳</div>
+    </div>
+  </div>
 </div>
 
 <!-- ── FOOTER ── -->
@@ -1002,6 +1035,94 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLega
   });
   document.addEventListener('click', function (e) {
     if (active && !active.contains(e.target)) hide();
+  });
+}());
+</script>
+
+<script>
+/* ── ANNOUNCEMENTS (Son Güncellemeler / What's New) ── */
+(function () {
+  var SUPA_URL = 'https://bvunvlcwqsjbozmjhyvi.supabase.co';
+  var SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJ2dW52bGN3cXNqYm96bWpoeXZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg1MzUyMjYsImV4cCI6MjA5NDExMTIyNn0.hyVKwNbYcbTe-Er6Tt8zDUAk7S8CUQi1hAyijEmCvpo';
+  var isEN = window._isEN;
+
+  // TR/EN labels
+  if (isEN) {
+    var lbl = document.getElementById('upd-lbl');
+    var ttl = document.getElementById('upd-title');
+    var dsc = document.getElementById('upd-desc');
+    if (lbl) lbl.textContent = "What's New";
+    if (ttl) ttl.textContent = 'Latest Updates';
+    if (dsc) dsc.textContent = 'App updates and announcements';
+  }
+
+  function typeIcon(type) {
+    if (type === 'feature') return '✨';
+    if (type === 'warning') return '⚠️';
+    return 'ℹ️';
+  }
+
+  function typeClass(type) {
+    if (type === 'feature') return 'type-feature';
+    if (type === 'warning') return 'type-warning';
+    return '';
+  }
+
+  function formatDate(iso) {
+    if (!iso) return '';
+    try {
+      var d = new Date(iso);
+      return d.toLocaleDateString(isEN ? 'en-US' : 'tr-TR', { year: 'numeric', month: 'long', day: 'numeric' });
+    } catch (e) { return iso; }
+  }
+
+  function esc(s) {
+    return String(s || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  var list = document.getElementById('ann-list');
+  if (!list) return;
+
+  fetch(
+    SUPA_URL + '/rest/v1/announcements?is_active=eq.true&order=published_at.desc&limit=5' +
+    '&select=id,title_tr,title_en,body_tr,body_en,type,published_at',
+    {
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': 'Bearer ' + SUPA_KEY
+      }
+    }
+  )
+  .then(function (r) { return r.json(); })
+  .then(function (data) {
+    if (!Array.isArray(data) || data.length === 0) {
+      list.innerHTML = '<div class="ann-empty">' +
+        esc(isEN ? 'No announcements yet.' : 'Henüz duyuru yok.') + '</div>';
+      return;
+    }
+    list.innerHTML = data.map(function (ann) {
+      var title = isEN ? (ann.title_en || ann.title_tr) : (ann.title_tr || ann.title_en);
+      var body  = isEN ? (ann.body_en  || ann.body_tr)  : (ann.body_tr  || ann.body_en);
+      var icon  = typeIcon(ann.type);
+      var cls   = typeClass(ann.type);
+      var date  = formatDate(ann.published_at);
+      return '<div class="ann-card ' + cls + '">' +
+        '<div class="ann-icon">' + icon + '</div>' +
+        '<div class="ann-body">' +
+          '<div class="ann-title">' + esc(title) + '</div>' +
+          (body ? '<div class="ann-text">' + esc(body) + '</div>' : '') +
+          '<div class="ann-date">' + esc(date) + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  })
+  .catch(function () {
+    list.innerHTML = '<div class="ann-empty">' +
+      esc(isEN ? 'Could not load updates.' : 'Güncellemeler yüklenemedi.') + '</div>';
   });
 }());
 </script>
