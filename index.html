@@ -795,20 +795,31 @@
       <!-- SVG harita JS tarafından doldurulur -->
       <svg id="world-svg" viewBox="0 0 960 480" xmlns="http://www.w3.org/2000/svg">
         <!-- Okyanus arka planı -->
-        <rect width="960" height="480" fill="rgba(14,21,39,0.5)"/>
-        <!-- Kıtalar (basitleştirilmiş) -->
+        <rect width="960" height="480" fill="rgba(10,18,35,0.55)"/>
+        <!-- Kıtalar: daha doğru basitleştirilmiş yollar -->
+        <!-- Grönland -->
+        <path d="M255,44 L335,28 L380,36 L382,58 L355,72 L318,76 L295,62 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
         <!-- Kuzey Amerika -->
-        <path d="M60,60 L210,50 L235,90 L245,155 L220,195 L195,210 L160,225 L125,215 L85,185 L62,145 L55,100 Z" fill="rgba(30,41,59,0.6)" stroke="rgba(148,163,184,.12)" stroke-width="1"/>
+        <path d="M38,68 L62,42 L185,36 L255,44 L295,62 L318,76 L315,95 L308,148 L285,172 L262,192 L248,210 L225,228 L195,238 L158,252 L128,240 L115,218 L130,200 L140,190 L150,218 L130,148 L108,110 L72,90 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
         <!-- Güney Amerika -->
-        <path d="M170,235 L235,220 L265,250 L275,305 L265,365 L245,410 L215,435 L185,430 L162,395 L150,340 L148,280 Z" fill="rgba(30,41,59,0.6)" stroke="rgba(148,163,184,.12)" stroke-width="1"/>
+        <path d="M168,232 L250,218 L275,250 L282,302 L268,362 L242,415 L215,438 L188,428 L162,398 L148,355 L148,292 L158,262 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
         <!-- Avrupa -->
-        <path d="M420,50 L510,45 L520,80 L510,115 L490,130 L460,128 L435,115 L415,90 Z" fill="rgba(30,41,59,0.6)" stroke="rgba(148,163,184,.12)" stroke-width="1"/>
+        <path d="M462,52 L508,42 L538,68 L528,100 L515,125 L498,140 L465,140 L440,128 L428,105 L442,80 L462,68 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
         <!-- Afrika -->
-        <path d="M435,140 L510,130 L535,155 L540,215 L530,285 L510,340 L480,375 L450,370 L425,330 L410,265 L410,195 Z" fill="rgba(30,41,59,0.6)" stroke="rgba(148,163,184,.12)" stroke-width="1"/>
-        <!-- Asya -->
-        <path d="M515,45 L770,40 L800,70 L810,120 L790,175 L760,195 L720,200 L680,185 L640,190 L600,175 L560,160 L530,140 L515,110 Z" fill="rgba(30,41,59,0.6)" stroke="rgba(148,163,184,.12)" stroke-width="1"/>
+        <path d="M428,140 L518,128 L552,155 L558,218 L545,288 L525,342 L498,372 L468,374 L440,352 L422,312 L408,260 L410,198 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
+        <!-- Arabistan Yarımadası -->
+        <path d="M548,148 L568,162 L578,188 L572,218 L552,235 L535,228 L535,180 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
+        <!-- Asya Ana Kara (Rusya + Orta/Doğu Asya) -->
+        <path d="M520,45 L640,38 L785,34 L900,38 L958,50 L958,98 L932,105 L882,112 L855,132 L858,162 L835,182 L808,198 L785,208 L758,222 L738,228 L720,270 L698,282 L672,285 L658,260 L638,228 L615,208 L592,182 L568,162 L548,148 L535,118 L528,98 L538,68 L520,68 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
+        <!-- Hindistan Yarımadası -->
+        <path d="M658,162 L700,162 L718,198 L720,268 L700,282 L672,285 L658,260 L648,222 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
+        <!-- Güneydoğu Asya / Endonezya (kısmen) -->
+        <path d="M738,185 L812,178 L825,205 L808,222 L788,232 L762,222 L738,212 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
+        <path d="M778,238 L828,232 L845,248 L838,265 L812,270 L782,260 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
+        <!-- Japonya (basit) -->
+        <path d="M838,125 L858,122 L862,142 L852,158 L838,152 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
         <!-- Avustralya -->
-        <path d="M720,300 L810,290 L840,315 L840,365 L810,390 L760,390 L720,365 L705,330 Z" fill="rgba(30,41,59,0.6)" stroke="rgba(148,163,184,.12)" stroke-width="1"/>
+        <path d="M712,290 L810,280 L862,305 L868,370 L838,400 L792,402 L748,385 L714,358 L700,325 Z" fill="rgba(32,44,70,0.7)" stroke="rgba(100,130,180,.14)" stroke-width="0.8"/>
         <!-- Ülke bubble'ları JS tarafından eklenir -->
         <g id="map-bubbles"></g>
       </svg>
@@ -1611,23 +1622,38 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLega
   }
 
   function render(counts){
-    var vals=Object.values(counts);
-    var max=vals.length?Math.max.apply(null,vals):1;
+    var vals=Object.keys(counts).map(function(k){ return counts[k]; });
+    var max=vals.length?Math.max.apply(null,vals.concat([1])):1;
     var html='';
+
+    /* 1. TÜM ülkeler: veri yoksa faint ghost nokta */
+    Object.keys(CENT).forEach(function(cc){
+      var c=CENT[cc];
+      if(counts[cc]>0) return; // veri olanlar 2. pastta çizilir
+      html+='<circle cx="'+c.x+'" cy="'+c.y+'" r="3.5" '+
+        'fill="rgba(100,120,165,0.10)" stroke="rgba(148,163,184,0.22)" stroke-width="0.7"/>';
+      html+='<text pointer-events="none" x="'+c.x+'" y="'+(c.y+9)+
+        '" text-anchor="middle" font-size="4.8" font-family="Inter,sans-serif" '+
+        'fill="rgba(148,163,184,0.28)" font-weight="600">'+cc+'</text>';
+    });
+
+    /* 2. Veri olan ülkeler: orantılı bubble */
     Object.keys(counts).forEach(function(cc){
       var c=CENT[cc]; if(!c) return;
       var cnt=counts[cc];
+      if(cnt<=0) return;
       var t=max>0?cnt/max:0;
-      var r=5+t*20;
+      var r=5+t*22;
       var isTR=cc==='TR';
       html+='<circle class="mc" cx="'+c.x+'" cy="'+c.y+'" r="'+r.toFixed(1)+
         '" fill="'+colorFor(t,isTR)+'" stroke="'+strokeFor(t,isTR)+'" stroke-width="1.2" '+
         'data-cc="'+cc+'" data-cnt="'+cnt+'"/>';
-      if(r>9){
+      if(r>8){
         html+='<text pointer-events="none" x="'+c.x+'" y="'+(c.y+4)+
-          '" text-anchor="middle" font-size="7" font-family="Inter,sans-serif" fill="rgba(241,245,249,.8)" font-weight="700">'+cc+'</text>';
+          '" text-anchor="middle" font-size="7" font-family="Inter,sans-serif" fill="rgba(241,245,249,.88)" font-weight="700">'+cc+'</text>';
       }
     });
+
     g.innerHTML=html;
 
     g.querySelectorAll('circle.mc').forEach(function(el){
