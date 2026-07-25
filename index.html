@@ -676,7 +676,7 @@
   <div class="stat-sep"></div>
   <div class="stat"><div class="stat-v" id="stat-total">—</div>
   <div class="stat-l" data-en="Threat records tracked">Tehdit Kaydı Takibimde</div>
-  <div class="stat-sub">USOM · URLhaus · OpenPhish · BOTVRIJ</div></div>
+  <div class="stat-sub">USOM · URLhaus · OpenPhish · BOTVRIJ · Topluluk</div></div>
   <div class="stat-sep"></div>
   <div class="stat"><div class="stat-v" id="stat-queries">—</div><div class="stat-l" data-en="Community queries today">Bugün topluluk sorgusu</div><div class="stat-sub">&nbsp;</div></div>
   <div class="stat-sep"></div>
@@ -727,9 +727,9 @@
     <div class="feature-row reverse fade-up fade-up-d1">
       <div class="fr-text">
         <p class="fr-lbl" data-en="Real-Time Intelligence">Gerçek Zamanlı İstihbarat</p>
-        <h3 class="fr-title" data-en="Four sources. One answer.">Dört kaynak. Tek cevap.</h3>
-        <p class="fr-desc" data-en="USOM, URLhaus, OpenPhish and BOTVRIJ — four live threat feeds, cross-checked simultaneously, updated every hour.">USOM, URLhaus, OpenPhish ve BOTVRIJ — saatlik güncellenen dört tehdit kaynağını aynı anda tarıyorum.</p>
-        <p class="fr-quote" data-en='"Four sources, one answer."'>"Dört kaynaktan tek cevap."</p>
+        <h3 class="fr-title" data-en="Five sources. One answer.">Beş kaynak. Tek cevap.</h3>
+        <p class="fr-desc" data-en="USOM, URLhaus, OpenPhish, BOTVRIJ and Community reports — five live threat feeds, cross-checked simultaneously, updated every hour.">USOM, URLhaus, OpenPhish, BOTVRIJ ve Topluluk ihbarları — saatlik güncellenen beş tehdit kaynağını aynı anda tarıyorum.</p>
+        <p class="fr-quote" data-en='"Five sources, one answer."'>"Beş kaynaktan tek cevap."</p>
       </div>
       <div class="fr-icon-box">⚡</div>
     </div>
@@ -875,7 +875,7 @@
     <h2 class="sec-title" data-en="Every query goes through this path.">Her sorgu bu yoldan geçiyor.</h2>
     <div class="steps">
       <div class="step"><div class="step-num">1</div><div><div class="step-t" data-en="Address detection">Adres tespiti</div><p class="step-d" data-en="I read the address from a QR code, pasted link or SMS. I also resolve shortened links to their real destination.">QR kod, yapıştırılan link veya SMS'ten adresi alıyorum. Kısaltılmış linklerin gerçek hedefini de çözümlüyorum.</p></div></div>
-      <div class="step"><div class="step-num">2</div><div><div class="step-t" data-en="Threat database scan">Tehdit veritabanı taraması</div><p class="step-d" data-en="USOM, URLhaus, OpenPhish and BOTVRIJ — four sources, simultaneously, updated hourly.">USOM, URLhaus, OpenPhish ve BOTVRIJ — dört kaynağı aynı anda tarıyorum. Saatlik güncellenen verilerle.</p></div></div>
+      <div class="step"><div class="step-num">2</div><div><div class="step-t" data-en="Threat database scan">Tehdit veritabanı taraması</div><p class="step-d" data-en="USOM, URLhaus, OpenPhish, BOTVRIJ and Community — five sources, simultaneously, updated hourly.">USOM, URLhaus, OpenPhish, BOTVRIJ ve Topluluk — beş kaynağı aynı anda tarıyorum. Saatlik güncellenen verilerle.</p></div></div>
       <div class="step"><div class="step-num">3</div><div><div class="step-t" data-en="Connection verification">Bağlantı doğrulama</div><p class="step-d" data-en="I try to reach the address from your network. Accessible? SSL valid? Where does it redirect?">Sizin ağınızdan adrese ulaşmayı deniyorum. Erişilebilir mi, SSL sertifikası geçerli mi, nereye yönlendiriyor?</p></div></div>
       <div class="step"><div class="step-num">4</div><div><div class="step-t" data-en="Clear result">Net sonuç</div><p class="step-d" data-en="Safe, suspicious or dangerous. No jargon. One clear answer.">Güvende, şüpheli veya tehlikeli. Jargon yok, teknik detay yok. Tek bir net cevap.</p></div></div>
     </div>
@@ -1182,7 +1182,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLega
       if(r && r.total_queries != null && r.total_queries >= 1000) {
         updateEl('stat-total', fmtK(r.total_queries));
       } else {
-        updateEl('stat-total', '4');
+        updateEl('stat-total', '5');
         // 1000 altında kaynak sayısını göster
         var el = document.getElementById('stat-total');
         if(el) {
