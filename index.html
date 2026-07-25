@@ -806,7 +806,7 @@
     <div class="map-container fade-up">
       <div id="map-tip"></div>
       <!-- SVG harita JS tarafından doldurulur -->
-      <svg id="world-svg" viewBox="0 0 960 480" xmlns="http://www.w3.org/2000/svg">
+      <svg id="world-svg" viewBox="0 0 960 415" xmlns="http://www.w3.org/2000/svg">
         <rect width="960" height="480" fill="rgba(10,18,35,0.55)"/>
         <!-- Ülke şekilleri: Natural Earth 110m (topojson-client ile JS'te yüklenir) -->
         <g id="world-countries"></g>
@@ -1551,16 +1551,27 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLega
     {key:'botvrij',   f:'source=eq.BOTVRIJ_OSINT'},
   ];
   var catQ=[
-    {key:'phishing',    f:'metadata->>category=eq.phishing'},
-    {key:'malware',     f:'metadata->>category=eq.malware'},
-    {key:'botnet',      f:'metadata->>category=eq.botnet'},
-    {key:'suspicious',  f:'metadata->>category=eq.suspicious'},
-    {key:'cyberattack', f:'metadata->>category=eq.cyberattack'},
+    {key:'phishing',    f:'category=eq.phishing'},
+    {key:'malware',     f:'category=eq.malware'},
+    {key:'botnet',      f:'category=eq.botnet'},
+    {key:'suspicious',  f:'category=eq.suspicious'},
+    {key:'cyberattack', f:'category=eq.cyberattack'},
   ];
+
+  function countHeadCat(filter){
+    return fetch(SUPA_URL+'/rest/v1/blacklisted_domains_categorized?'+filter+'&select=domain&limit=0',{
+      method:'HEAD',
+      headers:{'apikey':SUPA_KEY,'Authorization':'Bearer '+SUPA_KEY,'Prefer':'count=exact'}
+    }).then(function(r){
+      var cr=r.headers.get('Content-Range')||'';
+      var t=parseInt(cr.split('/')[1],10);
+      return isNaN(t)?0:t;
+    }).catch(function(){ return 0; });
+  }
 
   Promise.all(srcQ.map(function(q){ return countHead(q.f).then(function(c){ return {key:q.key,count:c}; }); }))
     .then(applyBars);
-  Promise.all(catQ.map(function(q){ return countHead(q.f).then(function(c){ return {key:q.key,count:c}; }); }))
+  Promise.all(catQ.map(function(q){ return countHeadCat(q.f).then(function(c){ return {key:q.key,count:c}; }); }))
     .then(applyBars);
 })();
 </script>
@@ -1634,6 +1645,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLega
         var features=topojson.feature(world,world.objects.countries).features;
         var html='';
         for(var i=0;i<features.length;i++){
+          if(Number(features[i].id)===10) continue; /* Antarktika */
           var d=geomToD(features[i].geometry);
           if(d) html+='<path d="'+d+'" fill="rgba(30,42,68,0.75)" stroke="rgba(100,130,180,0.22)" stroke-width="0.4"/>';
         }
