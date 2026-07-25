@@ -471,10 +471,11 @@
     .stat-bar-num  { font-size: .74rem; color: var(--dim); }
     .stat-bar-track { height: 5px; background: rgba(148,163,184,.1); border-radius: 3px; overflow: hidden; }
     .stat-bar-fill { height: 100%; border-radius: 3px; width: 0; transition: width 1.2s cubic-bezier(.16,1,.3,1); }
-    .fill-usom      { background: var(--green); }
-    .fill-urlhaus   { background: #EAB308; }
-    .fill-openphish { background: #F97316; }
-    .fill-botvrij   { background: #8B5CF6; }
+    .fill-usom           { background: var(--green); }
+    .fill-urlhaus        { background: #EAB308; }
+    .fill-openphish      { background: #F97316; }
+    .fill-botvrij        { background: #8B5CF6; }
+    .fill-community      { background: #EC4899; }
     .fill-phishing  { background: #F43F5E; }
     .fill-malware   { background: #EAB308; }
     .fill-botnet    { background: #F97316; }
@@ -781,6 +782,7 @@
           <div class="stat-bar-row"><div class="stat-bar-meta"><span class="stat-bar-name">URLhaus</span><span class="stat-bar-num" id="cnt-urlhaus">—</span></div><div class="stat-bar-track"><div class="stat-bar-fill fill-urlhaus" id="bar-urlhaus"></div></div></div>
           <div class="stat-bar-row"><div class="stat-bar-meta"><span class="stat-bar-name">OpenPhish</span><span class="stat-bar-num" id="cnt-openphish">—</span></div><div class="stat-bar-track"><div class="stat-bar-fill fill-openphish" id="bar-openphish"></div></div></div>
           <div class="stat-bar-row"><div class="stat-bar-meta"><span class="stat-bar-name">BOTVRIJ</span><span class="stat-bar-num" id="cnt-botvrij">—</span></div><div class="stat-bar-track"><div class="stat-bar-fill fill-botvrij" id="bar-botvrij"></div></div></div>
+          <div class="stat-bar-row"><div class="stat-bar-meta"><span class="stat-bar-name" data-en="Community">Topluluk</span><span class="stat-bar-num" id="cnt-community">—</span></div><div class="stat-bar-track"><div class="stat-bar-fill fill-community" id="bar-community"></div></div></div>
         </div>
       </div>
       <div>
@@ -1549,6 +1551,7 @@ document.addEventListener('keydown', function(e){ if(e.key==='Escape') closeLega
     {key:'urlhaus',   f:'source=eq.URLhaus_Malware'},
     {key:'openphish', f:'source=eq.OpenPhish_Live'},
     {key:'botvrij',   f:'source=eq.BOTVRIJ_OSINT'},
+    {key:'community', f:'source=eq.Community_Report'},
   ];
   var catQ=[
     {key:'phishing',    f:'category=eq.phishing'},
